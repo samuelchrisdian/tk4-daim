@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +60,32 @@ Route::middleware('auth')->group(function () {
             Route::post('/activate/{role_id?}', [RoleController::class, 'activate'])->name('master-role-activate');
             Route::post('/deactivate/{role_id?}', [RoleController::class, 'deactivate'])->name('master-role-deactivate');
             Route::post('/delete/{role_id?}', [RoleController::class, 'delete'])->name('master-role-delete');
+        });
+    });
+
+    Route::prefix('transaction')->group(function () {
+        Route::prefix('/order')->group(function () {
+            Route::get('/index', [OrderController::class, 'index'])->name('transaction-order-index');
+            Route::get('/add', [OrderController::class, 'add'])->name('transaction-order-add');
+            Route::get('/edit/{order_id?}', [OrderController::class, 'edit'])->name('transaction-order-edit');
+            Route::get('/show/{order_id?}', [OrderController::class, 'show'])->name('transaction-order-show');
+            Route::post('/store', [OrderController::class, 'store'])->name('transaction-order-store');
+            Route::post('/update/{order_id?}', [OrderController::class, 'update'])->name('transaction-order-update');
+            Route::post('/activate/{order_id?}', [OrderController::class, 'activate'])->name('transaction-order-activate');
+            Route::post('/deactivate/{order_id?}', [OrderController::class, 'deactivate'])->name('transaction-order-deactivate');
+            Route::post('/delete/{order_id?}', [OrderController::class, 'delete'])->name('transaction-order-delete');
+        });
+
+        Route::prefix('/production')->group(function () {
+            Route::get('/index', [ProductionController::class, 'index'])->name('transaction-production-index');
+            Route::get('/add', [ProductionController::class, 'add'])->name('transaction-production-add');
+            Route::get('/edit/{production_id?}', [ProductionController::class, 'edit'])->name('transaction-production-edit');
+            Route::get('/show/{production_id?}', [ProductionController::class, 'show'])->name('transaction-production-show');
+            Route::post('/store', [ProductionController::class, 'store'])->name('transaction-production-store');
+            Route::post('/update/{production_id?}', [ProductionController::class, 'update'])->name('transaction-production-update');
+            Route::post('/activate/{production_id?}', [ProductionController::class, 'activate'])->name('transaction-production-activate');
+            Route::post('/deactivate/{production_id?}', [ProductionController::class, 'deactivate'])->name('transaction-production-deactivate');
+            Route::post('/delete/{production_id?}', [ProductionController::class, 'delete'])->name('transaction-production-delete');
         });
     });
 });

@@ -7,12 +7,12 @@
             <div class="shop-breadcrumb">
 
                 <div class="breadcrumb-main">
-                    <h4 class="text-capitalize breadcrumb-title">Master Role</h4>
+                    <h4 class="text-capitalize breadcrumb-title">Transaction Order</h4>
                     <div class="breadcrumb-action justify-content-center flex-wrap">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="uil uil-estate"></i>Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Master Role</li>
+                                <li class="breadcrumb-item active" aria-current="page">Transaction Order</li>
                             </ol>
                         </nav>
                     </div>
@@ -48,10 +48,10 @@
                     <div class="userDatatable adv-table-table global-shadow border-light-0 w-100 adv-table">
                         <div class="table-responsive">
                             <div class="adv-table-table__header mb-4">
-                                <h4>Role List</h4>
+                                <h4>Order List</h4>
                                 <div class="adv-table-table__button">
-                                    <a href="{{ route('master-role-add') }}" class="btn px-15 btn-primary">
-                                        <i class="las la-plus fs-16"></i>Create Role</a>
+                                    <a href="{{ route('transaction-order-add') }}" class="btn px-15 btn-primary">
+                                        <i class="las la-plus fs-16"></i>Create Order</a>
                                 </div>
                             </div>
                             <div id="filter-form-container"></div>
@@ -62,7 +62,16 @@
                                             <span class="userDatatable-title">#</span>
                                         </th>
                                         <th>
+                                            <span class="userDatatable-title">Item</span>
+                                        </th>
+                                        <th>
                                             <span class="userDatatable-title">name</span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">qty</span>
+                                        </th>
+                                        <th>
+                                            <span class="userDatatable-title">status</span>
                                         </th>
                                         <th>
                                             <span class="userDatatable-title">action</span>
@@ -70,10 +79,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($role as $key => $value)
+                                    @foreach($order as $key => $value)
                                     <tr>
                                         <td>
                                             <div class="userDatatable-content">{{ $key + 1 }}</div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="userDatatable-inline-title">
+                                                    <a href="#" class="text-dark fw-500">
+                                                        <h6>{{ $value->item->name }}</h6>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
                                             <div class="d-flex">
@@ -85,19 +103,41 @@
                                             </div>
                                         </td>
                                         <td>
+                                            <div class="d-flex">
+                                                <div class="userDatatable-inline-title">
+                                                    <a href="#" class="text-dark fw-500">
+                                                        <h6>{{ $value->qty }}</h6>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="userDatatable-content">
+                                                @if($value->status == 1)
+                                                <span class="badge badge-round badge-success badge-lg">
+                                                    Complete
+                                                </span>
+                                                @else
+                                                <span class="badge badge-round badge-danger badge-lg">
+                                                    Incomplete
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td>
                                             <ul class="orderDatatable_actions mb-0 d-flex flex-wrap">
                                                 <li>
-                                                    <a href="{{ route('master-role-show', $value->role_id) }}" class="view">
+                                                    <a href="{{ route('transaction-order-show', $value->order_id) }}" class="view">
                                                         <i class="uil uil-eye"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('master-role-edit', $value->role_id) }}" class="edit">
+                                                    <a href="{{ route('transaction-order-edit', $value->order_id) }}" class="edit">
                                                         <i class="uil uil-edit"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a type="button" class="remove" id="delete-item" data-bs-toggle="modal" data-bs-target="#modal-delete" data-id="{{ $value->role_id }}" data-name="{{ $value->name }}">
+                                                    <a type="button" class="remove" id="delete-item" data-bs-toggle="modal" data-bs-target="#modal-delete" data-id="{{ $value->order_id }}" data-name="{{ $value->name }}">
                                                         <i class="uil uil-trash-alt"></i>
                                                     </a>
                                                 </li>
@@ -118,8 +158,8 @@
 @endsection
 
 @section('modal')
-<div class="modal-activate modal fade show" id="modal-activate" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-info" role="document">
+<div class="modal-activate modal fade show" id="modal-activate" tabindex="-1" order="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" order="document">
         <div class="modal-content">
             <form method="POST" id="modal-activate-form" action="">
                 @csrf
@@ -142,8 +182,8 @@
         </div>
     </div>
 </div>
-<div class="modal-deactivate modal fade show" id="modal-deactivate" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-info" role="document">
+<div class="modal-deactivate modal fade show" id="modal-deactivate" tabindex="-1" order="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" order="document">
         <div class="modal-content">
             <form method="POST" id="modal-deactivate-form" action="">
                 @csrf
@@ -166,8 +206,8 @@
         </div>
     </div>
 </div>
-<div class="modal-delete modal fade show" id="modal-delete" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-info" role="document">
+<div class="modal-delete modal fade show" id="modal-delete" tabindex="-1" order="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-info" order="document">
         <div class="modal-content">
             <form method="POST" id="modal-delete-form" action="">
                 @csrf
@@ -205,7 +245,7 @@
         let id = $(this).data('id');
         let name = $(this).data('name');
 
-        let url = "{{ route('master-role-activate', ':id') }}";
+        let url = "{{ route('transaction-order-activate', ':id') }}";
         url = url.replace(':id', id);
 
         $('#modal-activate-description').html(name);
@@ -216,7 +256,7 @@
         let id = $(this).data('id');
         let name = $(this).data('name');
 
-        let url = "{{ route('master-role-deactivate', ':id') }}";
+        let url = "{{ route('transaction-order-deactivate', ':id') }}";
         url = url.replace(':id', id);
 
         $('#modal-deactivate-description').html(name);
@@ -227,7 +267,7 @@
         let id = $(this).data('id');
         let name = $(this).data('name');
 
-        let url = "{{ route('master-role-delete', ':id') }}";
+        let url = "{{ route('transaction-order-delete', ':id') }}";
         url = url.replace(':id', id);
 
         $('#modal-delete-description').html(name);

@@ -25,7 +25,22 @@
                     <span class="menu-text">Role</span>
                 </a>
             </li>
-            @endif
+            @endif            
+            <li class="menu-title mt-30">
+                <span>Transaction</span>
+            </li>
+            <li>
+                <a href="{{ route('transaction-order-index') }}" class="{{ request()->segment(1) == 'transaction' && request()->segment(2) == 'order' ? 'active' : null }}">
+                    <span class="nav-icon uil uil-bill"></span>
+                    <span class="menu-text">Order</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('transaction-production-index') }}" class="{{ request()->segment(1) == 'transaction' && request()->segment(2) == 'production' ? 'active' : null }}">
+                    <span class="nav-icon uil uil-bolt-alt"></span>
+                    <span class="menu-text">Production</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
