@@ -40,6 +40,21 @@
                     <span class="nav-icon uil uil-bolt-alt"></span>
                     <span class="menu-text">Production</span>
                 </a>
+            </li>   
+            <li class="menu-title mt-30">
+                <span>Manager</span>
+            </li>
+            <li>
+                <a href="{{ route('dashboard-index') }}" class="{{ request()->segment(1) == 'dashboard' && request()->segment(2) == 'index' ? 'active' : null }}">
+                    <span class="nav-icon uil uil-balance-scale"></span>
+                    <span class="menu-text">Product</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('dashboard-chart') }}" class="{{ request()->segment(1) == 'dashboard' && request()->segment(2) == 'chart' ? 'active' : null }}">
+                    <span class="nav-icon uil uil-chart"></span>
+                    <span class="menu-text">Product Chart</span>
+                </a>
             </li>
         </ul>
     </div>

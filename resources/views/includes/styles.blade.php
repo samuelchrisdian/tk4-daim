@@ -44,3 +44,29 @@
 <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/Logo.png')}}">
 <!-- Fonts -->
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.0/css/line.css">
+
+<style>
+    .col-hijau {
+        background: green;
+        color: #FFFFFF;
+    }
+
+    .col-merah {
+        background: red;
+        color: #FFFFFF;
+    }
+
+    .ct-series-a .ct-bar,
+    .ct-series-a .ct-horizontal-bars {
+        stroke: green;
+    }
+
+    .ct-series-b .ct-bar,
+    .ct-series-b .ct-horizontal-bars {
+        stroke: red;
+    }
+
+    .ct-chart .ct-label {
+        font-size: 12px;
+    }
+</style>

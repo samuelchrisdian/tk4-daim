@@ -76,6 +76,10 @@ class ProductionController extends Controller
             $production->lead_time = $request->lead_time;
             $production->save();
 
+            $order = Order::where('order_id', $request->order_id)->first();
+            $order->status = 1;
+            $order->save();
+
             DB::commit();
 
             $production = Production::all();
@@ -107,6 +111,10 @@ class ProductionController extends Controller
             $production->qty = $request->qty;
             $production->lead_time = $request->lead_time;
             $production->save();
+
+            $order = Order::where('order_id', $request->order_id)->first();
+            $order->status = 1;
+            $order->save();
 
             DB::commit();
 

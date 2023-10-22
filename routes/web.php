@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductionController;
@@ -24,6 +25,10 @@ Route::middleware('auth')->group(function () {
         return view('index');
     })->name('dashboard');
 
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/index', [DashboardController::class, 'index'])->name('dashboard-index');
+        Route::get('/chart', [DashboardController::class, 'chart'])->name('dashboard-chart');
+    });
     Route::prefix('master')->group(function () {
         Route::prefix('/user')->group(function () {
             Route::get('/index', [UserController::class, 'index'])->name('master-user-index');

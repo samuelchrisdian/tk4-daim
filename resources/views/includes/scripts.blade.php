@@ -91,6 +91,7 @@
 <!-- plugins -->
 <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('plugins/select2/dist/js/select2.min.js') }}"></script>
+<script src="{{ asset('plugins/chartist/chartist.min.js') }}"></script>
 
 <!-- CKEditor5 -->
 <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
