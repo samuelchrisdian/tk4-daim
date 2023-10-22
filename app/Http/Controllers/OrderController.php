@@ -14,7 +14,7 @@ class OrderController extends Controller
     {
         $order = Order::orderBy('created_at', 'DESC')->get();
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 4) {
             return view('transaction.order.index')->with('order', $order);
         } else {
             return view('errors.403');
@@ -23,7 +23,7 @@ class OrderController extends Controller
 
     public function add(Request $request)
     {
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 4) {
             $item = Item::get();
             return view('transaction.order.form')->with('item', $item);
         } else {
@@ -35,7 +35,7 @@ class OrderController extends Controller
     {
         $order = Order::find($request->order_id);
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 4) {
             $item = Item::get();
             return view('transaction.order.edit')->with('order', $order)->with('item', $item);
         } else {
@@ -47,7 +47,7 @@ class OrderController extends Controller
     {
         $order = Order::find($request->order_id);
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 4) {
             return view('transaction.order.show')->with('order', $order);
         } else {
             return view('errors.403');

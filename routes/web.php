@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
@@ -24,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('index');
     })->name('dashboard');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::prefix('dashboard')->group(function () {
         Route::get('/index', [DashboardController::class, 'index'])->name('dashboard-index');

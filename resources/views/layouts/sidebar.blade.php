@@ -4,7 +4,7 @@
             <li>
                 <a href="{{ route('dashboard') }}" class="{{ request()->segment(1) == '' ? 'active' : null }}">
                     <span class="nav-icon uil uil-create-dashboard"></span>
-                    <span class="menu-text">Dashboard</span>
+                    <span class="menu-text">Welcome</span>
                 </a>
             </li>
             @if(auth()->user()->role_id == 1)
@@ -26,21 +26,28 @@
                 </a>
             </li>
             @endif            
+            @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 4 || auth()->user()->role_id == 5)
             <li class="menu-title mt-30">
                 <span>Transaction</span>
             </li>
             <li>
+                @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 4)
                 <a href="{{ route('transaction-order-index') }}" class="{{ request()->segment(1) == 'transaction' && request()->segment(2) == 'order' ? 'active' : null }}">
                     <span class="nav-icon uil uil-bill"></span>
                     <span class="menu-text">Order</span>
                 </a>
+                @endif
             </li>
             <li>
+                @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 5)
                 <a href="{{ route('transaction-production-index') }}" class="{{ request()->segment(1) == 'transaction' && request()->segment(2) == 'production' ? 'active' : null }}">
                     <span class="nav-icon uil uil-bolt-alt"></span>
                     <span class="menu-text">Production</span>
                 </a>
+                @endif
             </li>   
+            @endif
+            @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 3)
             <li class="menu-title mt-30">
                 <span>Manager</span>
             </li>
@@ -56,6 +63,7 @@
                     <span class="menu-text">Product Chart</span>
                 </a>
             </li>
+            @endif
         </ul>
     </div>
 </div>

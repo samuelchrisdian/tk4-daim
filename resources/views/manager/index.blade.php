@@ -166,7 +166,13 @@
                                         </td>
                                         <td>
                                             <div class="userDatatable-content">
-                                                {{ $value->Bullwhip_Effect }}
+                                                @if($value->BE > $value->parameter)
+                                                <a type="button" class="remove" id="bullwhip" data-bs-toggle="modal" data-bs-target="#modal-bullwhip">
+                                                    Bullwhip Effect
+                                                </a>
+                                                @else
+                                                Tidak Terjadi Bullwhip Effect
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
@@ -232,25 +238,23 @@
         </div>
     </div>
 </div>
-<div class="modal-delete modal fade show" id="modal-delete" tabindex="-1" order="dialog" aria-hidden="true">
+<div class="modal-bullwhip modal fade show" id="modal-bullwhip" tabindex="-1" order="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-info" order="document">
         <div class="modal-content">
-            <form method="POST" id="modal-delete-form" action="">
+            <form method="POST" id="modal-bullwhip-form" action="">
                 @csrf
                 <div class="modal-body">
-                    <div class="modal-info-body d-flex">
-                        <div class="modal-info-icon warning">
-                            <img src="{{ asset('img/svg/alert-circle.svg') }}" alt="alert-circle" class="svg">
-                        </div>
-                        <div class="modal-info-text">
-                            <h6>Do you Want to delete these item?</h6>
-                            <p id="modal-delete-description"></p>
-                        </div>
-                    </div>
+                    <h4 class="modal-title" id="myModalLabel"> Solusi Bullwhip</h4>
+                    <ol>
+                        <li> Menjamin ketersediaan produk dengan memperhatikan tingkat pemesanan </li>
+                        <li> Mengatisipasi terjadinya fluktuasi permintaan </li>
+                        <li> Menjaga arus komunikasi agar tidak terjadi penundaan sehingga arus permintaan selalu lancar </li>
+                        <li> Menjaga <b>Lead Time </b> tetap stabil </li>
+                        <li> Melakukan peramalan dengan metode yang akurat <i> (dilakukan penelitian lanjutan) karena pada penelitian ini tidak dibahas metode peramalan </li>
+                    </ol>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-light btn-outlined btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-info btn-sm" data-bs-dismiss="modal">Ok</button>
+                    <button type="button" class="btn btn-info btn-sm" data-bs-dismiss="modal">Ok</button>
                 </div>
             </form>
         </div>
@@ -287,17 +291,6 @@
 
         $('#modal-deactivate-description').html(name);
         $('#modal-deactivate-form').attr('action', url);
-    });
-
-    $(document).on("click", "#delete-item", function() {
-        let id = $(this).data('id');
-        let name = $(this).data('name');
-
-        let url = "{{ route('transaction-order-delete', ':id') }}";
-        url = url.replace(':id', id);
-
-        $('#modal-delete-description').html(name);
-        $('#modal-delete-form').attr('action', url);
     });
 </script>
 @endsection

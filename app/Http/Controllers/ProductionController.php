@@ -15,7 +15,7 @@ class ProductionController extends Controller
     {
         $production = Production::orderBy('created_at', 'DESC')->get();
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 5) {
             return view('transaction.production.index')->with('production', $production);
         } else {
             return view('errors.403');
@@ -24,7 +24,7 @@ class ProductionController extends Controller
 
     public function add(Request $request)
     {
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 5) {
             $order = Order::where('status', 0)->get();
             $item = Item::get();
             return view('transaction.production.form')->with('order', $order)->with('item', $item);
@@ -37,7 +37,7 @@ class ProductionController extends Controller
     {
         $production = Production::find($request->production_id);
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 5) {
             $order = Order::where('status', 0)->get();
             $item = Item::get();
             return view('transaction.production.edit')->with('order', $order)->with('item', $item);
@@ -50,7 +50,7 @@ class ProductionController extends Controller
     {
         $production = Production::find($request->production_id);
 
-        if (auth()->user()->role_id == 1) {
+        if (auth()->user()->role_id == 1 || auth()->user()->role_id == 5) {
             return view('transaction.production.show')->with('production', $production);
         } else {
             return view('errors.403');
